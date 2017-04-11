@@ -1,0 +1,18 @@
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\bin\Debug\MCP2221 Form.exe.config
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\bin\Debug\MCP2221 Form.exe
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\bin\Debug\MCP2221 Form.pdb
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.csprojResolveAssemblyReference.cache
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221_Form.Form1.resources
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221_Form.Properties.Resources.resources
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.csproj.GenerateResource.Cache
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.exe
+C:\Users\gday\Documents\School\MCP2221 Dev\MCP2221 Form\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.pdb
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\bin\Debug\MCP2221 Form.exe.config
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.exe
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.pdb
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\bin\Debug\MCP2221 Form.exe
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\bin\Debug\MCP2221 Form.pdb
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.csprojResolveAssemblyReference.cache
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221_Form.Form1.resources
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221_Form.Properties.Resources.resources
+C:\Users\gday\Documents\School\MCP2221_Programmer\MCP2221 Form\MCP2221 Form\obj\Debug\MCP2221 Form.csproj.GenerateResource.Cache

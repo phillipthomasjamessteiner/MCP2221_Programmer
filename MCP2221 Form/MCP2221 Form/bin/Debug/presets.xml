@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<presets>
+	<preset id="1">
+		<Name>ATtiny45</Name>
+		<WordSize>2</WordSize>
+		<PageSize>32</PageSize>
+		<NumPages>64</NumPages>
+	</preset>
+	<preset id="2">
+		<Name>ATtiny85</Name>
+		<WordSize>2</WordSize>
+		<PageSize>32</PageSize>
+		<NumPages>128</NumPages>
+	</preset>
+</presets>
