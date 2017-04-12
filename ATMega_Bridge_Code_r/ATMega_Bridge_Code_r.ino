@@ -8,7 +8,7 @@ uint8_t I2CState = 0;
 void setup() {
   Serial.begin(9600);
   Serial.println("Serial begin");
-  Wire.begin(64);
+  Wire.begin(11);
   Wire.onRequest(I2CRequested);
   Wire.onReceive(I2CRecieved);
 }
@@ -37,6 +37,7 @@ void I2CRecieved(uint8_t numBytes) {
     case 5:
       I2CState = 0; // Return 5 on request
       break;
+    
   }
   Serial.println(dataRecieved);
 }
