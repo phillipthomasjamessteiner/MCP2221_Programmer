@@ -19,10 +19,7 @@ namespace MCP2221_Form {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form Form1 = new Form1();
-            Application.Run(Form1);
-
-            Console.WriteLine("Hit");
-            
+            Application.Run(Form1);            
         }
     }
 }

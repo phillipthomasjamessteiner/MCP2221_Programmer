@@ -54,7 +54,7 @@
             this.ProgConsole.Location = new System.Drawing.Point(12, 268);
             this.ProgConsole.Name = "ProgConsole";
             this.ProgConsole.Size = new System.Drawing.Size(360, 147);
-            this.ProgConsole.TabIndex = 0;
+            this.ProgConsole.TabIndex = 16;
             // 
             // label1
             // 
@@ -71,14 +71,14 @@
             this.PresetsListBox.Location = new System.Drawing.Point(12, 25);
             this.PresetsListBox.Name = "PresetsListBox";
             this.PresetsListBox.Size = new System.Drawing.Size(120, 95);
-            this.PresetsListBox.TabIndex = 2;
+            this.PresetsListBox.TabIndex = 1;
             // 
             // WordSizeTextBox
             // 
             this.WordSizeTextBox.Location = new System.Drawing.Point(12, 151);
             this.WordSizeTextBox.Name = "WordSizeTextBox";
             this.WordSizeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.WordSizeTextBox.TabIndex = 3;
+            this.WordSizeTextBox.TabIndex = 8;
             this.WordSizeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WordSizeTextBox_KeyPress);
             // 
             // NumPagesTextBox
@@ -86,7 +86,7 @@
             this.NumPagesTextBox.Location = new System.Drawing.Point(272, 151);
             this.NumPagesTextBox.Name = "NumPagesTextBox";
             this.NumPagesTextBox.Size = new System.Drawing.Size(100, 20);
-            this.NumPagesTextBox.TabIndex = 4;
+            this.NumPagesTextBox.TabIndex = 10;
             this.NumPagesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumPagesTextBox_KeyPress);
             // 
             // PageSizeTextBox
@@ -94,7 +94,7 @@
             this.PageSizeTextBox.Location = new System.Drawing.Point(142, 151);
             this.PageSizeTextBox.Name = "PageSizeTextBox";
             this.PageSizeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.PageSizeTextBox.TabIndex = 5;
+            this.PageSizeTextBox.TabIndex = 9;
             this.PageSizeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PageSizeTextBox_KeyPress);
             // 
             // label2
@@ -129,7 +129,7 @@
             this.FlashFilePathTextBox.Location = new System.Drawing.Point(142, 100);
             this.FlashFilePathTextBox.Name = "FlashFilePathTextBox";
             this.FlashFilePathTextBox.Size = new System.Drawing.Size(200, 20);
-            this.FlashFilePathTextBox.TabIndex = 9;
+            this.FlashFilePathTextBox.TabIndex = 6;
             // 
             // label5
             // 
@@ -145,7 +145,7 @@
             this.BrowseFlashFileButton.Location = new System.Drawing.Point(348, 99);
             this.BrowseFlashFileButton.Name = "BrowseFlashFileButton";
             this.BrowseFlashFileButton.Size = new System.Drawing.Size(24, 20);
-            this.BrowseFlashFileButton.TabIndex = 11;
+            this.BrowseFlashFileButton.TabIndex = 7;
             this.BrowseFlashFileButton.Text = "...";
             this.BrowseFlashFileButton.UseVisualStyleBackColor = true;
             this.BrowseFlashFileButton.Click += new System.EventHandler(this.BrowseFlashFileButton_Click);
@@ -159,7 +159,7 @@
             this.SavePresetButton.Location = new System.Drawing.Point(142, 25);
             this.SavePresetButton.Name = "SavePresetButton";
             this.SavePresetButton.Size = new System.Drawing.Size(100, 23);
-            this.SavePresetButton.TabIndex = 12;
+            this.SavePresetButton.TabIndex = 2;
             this.SavePresetButton.Text = "Save Preset";
             this.SavePresetButton.UseVisualStyleBackColor = true;
             this.SavePresetButton.Click += new System.EventHandler(this.SavePresetButton_Click);
@@ -169,7 +169,7 @@
             this.ProgCodeButton.Location = new System.Drawing.Point(272, 25);
             this.ProgCodeButton.Name = "ProgCodeButton";
             this.ProgCodeButton.Size = new System.Drawing.Size(100, 23);
-            this.ProgCodeButton.TabIndex = 13;
+            this.ProgCodeButton.TabIndex = 4;
             this.ProgCodeButton.Text = "Program Code";
             this.ProgCodeButton.UseVisualStyleBackColor = true;
             // 
@@ -178,7 +178,7 @@
             this.WipeChipButton.Location = new System.Drawing.Point(272, 55);
             this.WipeChipButton.Name = "WipeChipButton";
             this.WipeChipButton.Size = new System.Drawing.Size(100, 23);
-            this.WipeChipButton.TabIndex = 14;
+            this.WipeChipButton.TabIndex = 5;
             this.WipeChipButton.Text = "Wipe Chip";
             this.WipeChipButton.UseVisualStyleBackColor = true;
             // 
@@ -187,7 +187,7 @@
             this.LoadPresetButton.Location = new System.Drawing.Point(142, 55);
             this.LoadPresetButton.Name = "LoadPresetButton";
             this.LoadPresetButton.Size = new System.Drawing.Size(100, 23);
-            this.LoadPresetButton.TabIndex = 15;
+            this.LoadPresetButton.TabIndex = 3;
             this.LoadPresetButton.Text = "Load Preset";
             this.LoadPresetButton.UseVisualStyleBackColor = true;
             this.LoadPresetButton.Click += new System.EventHandler(this.LoadPresetButton_Click);
@@ -198,7 +198,7 @@
             this.DevConnListBox.Location = new System.Drawing.Point(9, 199);
             this.DevConnListBox.Name = "DevConnListBox";
             this.DevConnListBox.Size = new System.Drawing.Size(120, 56);
-            this.DevConnListBox.TabIndex = 16;
+            this.DevConnListBox.TabIndex = 11;
             // 
             // label6
             // 
@@ -214,7 +214,7 @@
             this.SelDevButton.Location = new System.Drawing.Point(139, 199);
             this.SelDevButton.Name = "SelDevButton";
             this.SelDevButton.Size = new System.Drawing.Size(100, 23);
-            this.SelDevButton.TabIndex = 18;
+            this.SelDevButton.TabIndex = 12;
             this.SelDevButton.Text = "Select Device";
             this.SelDevButton.UseVisualStyleBackColor = true;
             this.SelDevButton.Click += new System.EventHandler(this.SelDevButton_Click);
@@ -224,7 +224,7 @@
             this.TstConnButton.Location = new System.Drawing.Point(269, 228);
             this.TstConnButton.Name = "TstConnButton";
             this.TstConnButton.Size = new System.Drawing.Size(100, 23);
-            this.TstConnButton.TabIndex = 19;
+            this.TstConnButton.TabIndex = 15;
             this.TstConnButton.Text = "Test Connection";
             this.TstConnButton.UseVisualStyleBackColor = true;
             // 
@@ -233,7 +233,7 @@
             this.RefreshDevButton.Location = new System.Drawing.Point(269, 199);
             this.RefreshDevButton.Name = "RefreshDevButton";
             this.RefreshDevButton.Size = new System.Drawing.Size(100, 23);
-            this.RefreshDevButton.TabIndex = 20;
+            this.RefreshDevButton.TabIndex = 13;
             this.RefreshDevButton.Text = "Refresh Devices";
             this.RefreshDevButton.UseVisualStyleBackColor = true;
             this.RefreshDevButton.Click += new System.EventHandler(this.RefreshDevButton_Click);
@@ -243,7 +243,7 @@
             this.CurrentDevTextbox.Location = new System.Drawing.Point(139, 234);
             this.CurrentDevTextbox.Name = "CurrentDevTextbox";
             this.CurrentDevTextbox.Size = new System.Drawing.Size(100, 20);
-            this.CurrentDevTextbox.TabIndex = 21;
+            this.CurrentDevTextbox.TabIndex = 14;
             // 
             // Form1
             // 

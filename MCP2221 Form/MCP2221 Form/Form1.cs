@@ -99,6 +99,29 @@ namespace MCP2221_Form {
 
         private void SavePresetButton_Click(object sender, EventArgs e) {
 
+            XmlDocument presetDoc = new XmlDocument(); // Define XMLdoc
+            presetDoc.Load(Path.GetFullPath("../data/presets.xml")); // load xml
+            XmlElement root = presetDoc.DocumentElement; // Create root element to add onto
+
+            XmlNode newPreset = presetDoc.CreateNode("element", "preset",""); // Create new preset element
+
+            XmlElement presetName = presetDoc.CreateElement("Name"); // Create Name Element
+            presetName.InnerText = WordSizeTextBox.Text + " " + PageSizeTextBox.Text + " " + NumPagesTextBox.Text; // Set name to text from text boxes
+            XmlElement presetWordSize = presetDoc.CreateElement("WordSize");
+            presetWordSize.InnerText = WordSizeTextBox.Text;
+            XmlElement presetPageSize = presetDoc.CreateElement("PageSize");
+            presetPageSize.InnerText = PageSizeTextBox.Text;
+            XmlElement presetNumPages = presetDoc.CreateElement("NumPages");
+            presetNumPages.InnerText = NumPagesTextBox.Text;
+
+
+            root.AppendChild(newPreset);
+            newPreset.AppendChild(presetName);
+            newPreset.AppendChild(presetWordSize);
+            newPreset.AppendChild(presetPageSize);
+            newPreset.AppendChild(presetNumPages);
+
+            presetDoc.Save(Path.GetFullPath("../data/presets.xml"));
 
             RefreshPresetList(); // Refresh List after xml is updated
         }
@@ -165,8 +188,13 @@ namespace MCP2221_Form {
         [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "ReadGpioPinValue", CharSet = CharSet.Unicode)]
         static extern int ReadGpioPinValue(Byte pinNumber);
         
-        [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "ReadGpioPinValue", CharSet = CharSet.Unicode)]
+        [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "GetUsbStringDescriptor", CharSet = CharSet.Unicode)]
         static extern int GetUsbStringDescriptor(char[] descriptor);
+
+        [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "GetSelectedDevInfo", CharSet = CharSet.Unicode)]
+        static extern int GetSelectedDevInfo(char[] devInformation);
+
+
 
 
         public string[] GetDevices() { // Executes first in setup code
@@ -180,7 +208,8 @@ namespace MCP2221_Form {
                     char[] descript = new char[31];
                     SelectDev(i);
                     GetUsbStringDescriptor(descript);
-                    devices[i] = descript.ToString();
+                    string d = new string(descript);
+                    devices[i] = i.ToString() + ": " + d;
                     // devices[i] = "Raan" + i.ToString();
                 }
 
