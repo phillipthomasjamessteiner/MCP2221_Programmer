@@ -8,6 +8,8 @@ using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 
+
+
 namespace MCP2221_Form {
 
     static class Program {

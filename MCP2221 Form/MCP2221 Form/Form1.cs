@@ -10,6 +10,14 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml;
+using System.Threading;
+
+/* ATmega I2C Commands:
+ *  0 = Reset
+ *  1 to 5 = Test Connection - Return 5 on next request for read
+ * 
+ * 
+ */
 
 namespace MCP2221_Form {
 
@@ -17,6 +25,7 @@ namespace MCP2221_Form {
         MCPFunctions mcp = new MCPFunctions();
 
         int DeviceNumber = 0;
+        byte ATMEGAAddress = 1;
 
         public Form1() {
             InitializeComponent();
@@ -39,9 +48,9 @@ namespace MCP2221_Form {
             DialogResult result = openFileDialog1.ShowDialog(); // Open file Dialog
             if (result == DialogResult.OK) { // Test Result
                 FlashFilePathTextBox.Text = openFileDialog1.FileName; // Send Path to Path Textbox
+                ProgConsole.Items.Add("Opening " + openFileDialog1.FileName);
             }
         }
-
 
         /* Numeric Data Only */
         private void WordSizeTextBox_KeyPress(object sender, KeyPressEventArgs e) {
@@ -79,6 +88,7 @@ namespace MCP2221_Form {
 
         private void RefreshDevButton_Click(object sender, EventArgs e) {
             GetDevices(); // Update Devices in Listbox
+            ProgConsole.Items.Add("Devices Refreshed");
         }
 
         void GetDevices() { // Get device discriptors and add, with indexes, to listbox for selection
@@ -93,7 +103,7 @@ namespace MCP2221_Form {
             if (DevConnListBox.SelectedItem != null && DevConnListBox.SelectedItem.ToString() != "No Devices Connected") { // Check Data to prevent null exceptions
                 CurrentDevTextbox.Text = DevConnListBox.SelectedItem.ToString(); // Add Selected Item to Listbox
                 DeviceNumber = DevConnListBox.SelectedIndex; // Set Current Device Index to listbox index
-                // ProgConsole.Items.Add(DeviceNumber.ToString());
+                ProgConsole.Items.Add("Device " + DeviceNumber.ToString() + " selected");
             }
         }
 
@@ -161,6 +171,16 @@ namespace MCP2221_Form {
                 PresetsListBox.Items.Add(presetName); // Add to listbox
             }
         }
+
+        private void TstConnButton_Click(object sender, EventArgs e) {
+            ATMEGAAddress = mcp.TestConnection(DeviceNumber);
+            if (ATMEGAAddress == 0) { // If address is zero throw error
+                ProgConsole.Items.Add("Error Connecting");
+            }
+            else {
+                ProgConsole.Items.Add("Connected at address " + ATMEGAAddress.ToString());
+            }
+        }
     }
     public class MCPFunctions {
         // DLL Imports
@@ -177,25 +197,22 @@ namespace MCP2221_Form {
         static extern int SelectDev(int whichDevice); // Import SelectDev to select which device to connect to
 
         [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "ReadI2cData", CharSet = CharSet.Unicode)]
-        static extern int ReadI2cData(Byte i2cAddress, Byte[] i2cDataReceived, UInt32 numberOfBytesToRead, UInt32 i2cBusSpeed); // Import I2C Read Function
+        static extern int ReadI2cData(byte i2cAddress, byte[] i2cDataReceived, UInt32 numberOfBytesToRead, UInt32 i2cBusSpeed); // Import I2C Read Function
 
-        [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "SelectDev", CharSet = CharSet.Unicode)]
-        static extern int WriteI2cData(Byte i2cAddress, Byte[] i2cDataToSend, UInt32 numberOfBytesToWrite, UInt32 i2cBusSpeed);
+        [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "WriteI2cData", CharSet = CharSet.Unicode)]
+        static extern int WriteI2cData(byte i2cAddress, byte[] i2cDataToSend, UInt32 numberOfBytesToWrite, UInt32 i2cBusSpeed);
 
         [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "SetGpPinDirection", CharSet = CharSet.Unicode)]
-        static extern int SetGpPinDirection(int whichToSet, Byte pinNumber, Byte directionToSet);
+        static extern int SetGpPinDirection(int whichToSet, byte pinNumber, byte directionToSet);
 
         [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "ReadGpioPinValue", CharSet = CharSet.Unicode)]
-        static extern int ReadGpioPinValue(Byte pinNumber);
+        static extern int ReadGpioPinValue(byte pinNumber);
         
         [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "GetUsbStringDescriptor", CharSet = CharSet.Unicode)]
         static extern int GetUsbStringDescriptor(char[] descriptor);
 
         [DllImport("MCP2221DLL-UM_x86.dll", EntryPoint = "GetSelectedDevInfo", CharSet = CharSet.Unicode)]
         static extern int GetSelectedDevInfo(char[] devInformation);
-
-
-
 
         public string[] GetDevices() { // Executes first in setup code
             DllInit();
@@ -223,6 +240,37 @@ namespace MCP2221_Form {
             
         }
 
+        public byte TestConnection(int index) {
+            byte address = 0;
+            SelectDev(index);
 
+            if (GetConnectionStatus()) {
+                bool connected = false;
+                int errorCount = 0;
+
+                while (!connected) {
+                    for (byte addr = 0; addr < 128; addr ++) {
+                        byte[] tstCommand = { 5 }; // Create byte array to write
+                        byte[] returnedData = new byte[1]; // Create byte array to read to
+
+                        int ackWrite = WriteI2cData(Convert.ToByte(addr << 1), tstCommand, 1, 100000);
+                        // Shift address over one to send  7 bit address
+                        int ackRead = ReadI2cData(Convert.ToByte(addr << 1), returnedData, 1, 100000);
+
+                        if (ackWrite == 0 && ackRead == 0 && returnedData[0] == 5) { // If both methods worked and recieved data is correct
+                            connected = true;
+                            address = addr;
+                            break;
+                        }
+                    }
+                    errorCount++;
+                    if (errorCount > 1) return 0; // Try twice
+                }
+                return address;
+            }
+            else {
+                return 0; // Conection Failed
+            }
+        }
     }
 }

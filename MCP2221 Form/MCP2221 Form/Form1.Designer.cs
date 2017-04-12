@@ -227,6 +227,7 @@
             this.TstConnButton.TabIndex = 15;
             this.TstConnButton.Text = "Test Connection";
             this.TstConnButton.UseVisualStyleBackColor = true;
+            this.TstConnButton.Click += new System.EventHandler(this.TstConnButton_Click);
             // 
             // RefreshDevButton
             // 
