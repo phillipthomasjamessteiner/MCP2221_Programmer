@@ -21,6 +21,7 @@ namespace MCP2221_Form {
         public Form1() {
             InitializeComponent();
             GetDevices();
+            RefreshPresetList();
         }
 
         /* Form Return Function
@@ -80,8 +81,7 @@ namespace MCP2221_Form {
             GetDevices(); // Update Devices in Listbox
         }
 
-        void GetDevices() {
-            // = new string[10];
+        void GetDevices() { // Get device discriptors and add, with indexes, to listbox for selection
             DevConnListBox.Items.Clear(); // Clear Listbox
             string[] devices = mcp.GetDevices(); // Get Strings from devices
             for (int i = 0; i < devices.Length; i++) {
@@ -99,18 +99,43 @@ namespace MCP2221_Form {
 
         private void SavePresetButton_Click(object sender, EventArgs e) {
 
+
+            RefreshPresetList(); // Refresh List after xml is updated
         }
 
         private void LoadPresetButton_Click(object sender, EventArgs e) {
-            string path = Path.GetFullPath("../data/presets.xml");
-            ProgConsole.Items.Add(path);
-            XmlDocument presetDoc = new XmlDocument();
-            presetDoc.Load("presets.xml");
 
-            XmlNodeList presetList = presetDoc.GetElementsByTagName("preset");
+            XmlDocument presetDoc = new XmlDocument(); // Define XMLdoc
+            presetDoc.Load(Path.GetFullPath("../data/presets.xml")); // load xml
 
+            XmlNodeList presetList = presetDoc.GetElementsByTagName("preset"); // create list of preset nodes
+            int presetIndex = PresetsListBox.SelectedIndex; // Get selected index from listbox
+            if (presetIndex < 0) return; // Return Function if no index has been selected
+            XmlNode selectedPreset = presetList[presetIndex];
+
+            // Get Individual Children by name
+            XmlNode wordSize = selectedPreset.SelectSingleNode("WordSize");
+            XmlNode pageSize = selectedPreset.SelectSingleNode("PageSize");
+            XmlNode numPages = selectedPreset.SelectSingleNode("NumPages");
+
+            // Store values in textboxes
+            WordSizeTextBox.Text = wordSize.InnerText;
+            PageSizeTextBox.Text = pageSize.InnerText;
+            NumPagesTextBox.Text = numPages.InnerText;
+        }
+
+        public void RefreshPresetList() { // Update presets in listbox from presets.xml
+
+            XmlDocument presetDoc = new XmlDocument(); // Define XMLdoc
+            presetDoc.Load(Path.GetFullPath("../data/presets.xml")); // load xml
+
+            XmlNodeList presetList = presetDoc.GetElementsByTagName("preset"); // create list of preset nodes
+            PresetsListBox.Items.Clear(); // clear listbox
             for (int i = 0; i < presetList.Count; i++) {
-
+                XmlNode currentNode = presetList[i]; //get single node from nodelist
+                XmlNode presetNameNode = currentNode.SelectSingleNode("Name"); // get child with tag "Name"
+                string presetName = presetNameNode.InnerText; // Get Name Child's content
+                PresetsListBox.Items.Add(presetName); // Add to listbox
             }
         }
     }
