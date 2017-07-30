@@ -25,7 +25,7 @@ namespace MCP2221_Form {
         MCPFunctions mcp = new MCPFunctions();
 
         int DeviceNumber = 0;
-        byte ATMEGAAddress = 1;
+        byte ATMEGAAddress = 8;
 
         public Form1() {
             InitializeComponent();
@@ -241,36 +241,38 @@ namespace MCP2221_Form {
         }
 
         public byte TestConnection(int index) {
-            byte address = 0;
+            DllInit();
             SelectDev(index);
+            byte addr = GetProgrammerAddress();
+            return 0;
+        }
 
+        public byte GetProgrammerAddress() {
             if (GetConnectionStatus()) {
                 bool connected = false;
-                int errorCount = 0;
+                byte numFailedCycles = 0;
+
+                byte[] TstCommand = { 11, 20 }; // If device responds, it should return the second command byte (20 in this case)
+                byte[] returnedEcho = new byte[1];
 
                 while (!connected) {
                     for (byte addr = 0; addr < 128; addr ++) {
-                        byte[] tstCommand = { 5 }; // Create byte array to write
-                        byte[] returnedData = new byte[1]; // Create byte array to read to
 
-                        int ackWrite = WriteI2cData(Convert.ToByte(addr << 1), tstCommand, 1, 100000);
-                        // Shift address over one to send  7 bit address
-                        int ackRead = ReadI2cData(Convert.ToByte(addr << 1), returnedData, 1, 100000);
+                        int ackWrite = WriteI2cData(Convert.ToByte(addr << 1), TstCommand, 2, 100000);
 
-                        if (ackWrite == 0 && ackRead == 0 && returnedData[0] == 5) { // If both methods worked and recieved data is correct
-                            connected = true;
-                            address = addr;
-                            break;
+                        int ackRead = ReadI2cData(Convert.ToByte(addr << 1), returnedEcho, 1, 100000);
+
+                        if (ackWrite == 0 && ackRead == 0 && returnedEcho[0] == 20) {
+                            return addr;
                         }
                     }
-                    errorCount++;
-                    if (errorCount > 1) return 0; // Try twice
+                    numFailedCycles ++;
+                    if (numFailedCycles > 1) {
+                        return 0; // Fail
+                    }
                 }
-                return address;
             }
-            else {
-                return 0; // Conection Failed
-            }
+            return 0; // Fail
         }
     }
 }

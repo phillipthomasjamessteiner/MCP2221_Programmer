@@ -13,7 +13,7 @@
     <NumPages>128</NumPages>
   </preset>
   <preset>
-    <Name>2 32 128</Name>
+    <Name>ATtiny861</Name>
     <WordSize>2</WordSize>
     <PageSize>32</PageSize>
     <NumPages>128</NumPages>
